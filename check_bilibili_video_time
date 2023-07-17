@@ -1,0 +1,32 @@
+function calTime(start, end) {
+    var lis = document.querySelectorAll('.list-box .duration');
+    var time_h = 0; // 小时
+    var time_m = 0; // 分
+    var time_s = 0; // 秒
+    lis.forEach((currentValue, index) => {
+        if (index >= start - 1 && index <= end - 1) {
+            let time = currentValue.innerText;
+            let timeArr = time.split(':')
+            if (timeArr.length == 3){ 
+                time_h += Number(timeArr[0])
+                time_m += Number(timeArr[1]);
+                time_s += Number(timeArr[2]);
+            }else{
+                time_m += Number(timeArr[0]);
+                time_s += Number(timeArr[1]);
+            }
+        }
+    })
+    time_m = time_m + parseInt(time_s / 60)
+    time_s = time_s % 60
+    time_h += parseInt(time_m / 60)
+    time_m = time_m % 60
+    console.log(`从p${start}到p${end} 总时长为${time_h}:${time_m}:${time_s}`);
+	console.log('-----')
+	return time_h*3600+time_m*60+time_s
+}
+
+var end = document.querySelectorAll('.list-box .duration').length
+var now = Number(window.location.search.split('&')[0].split('=')[1])
+console.log('-----')
+console.log('目前还剩'+(Number(calTime(now, end)/calTime(1, end))*100).toFixed(2)+'%')
