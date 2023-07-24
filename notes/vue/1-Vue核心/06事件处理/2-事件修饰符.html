@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+    <style>
+        *{
+            margin: 10px 0px;
+        }
+        #demo1{
+            height: 50px;
+            background-color: red;
+        }
+        div{
+            padding: 5px;
+        }
+        .box1{
+            height: 100px;
+            background-color: orange;
+        }
+        .box2{
+            height: 50px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Vue中的事件修饰符：
+            1.prevent：阻止默认事件
+            2.stop：阻止事件冒泡
+            3.once：事件只触发一次
+            4.capture：使用时间的捕获模式
+            5.self：只有event.target是当前操作的元素时才触发事件
+            6.passive：事件的默认行为当即执行，无需等待事件回调执行完毕 
+    -->
+    <div id="root">
+        <h2>欢迎来到{{name}}学习</h2>
+        <!-- 1.prevent：阻止默认事件 -->
+        <a href="http://www.atguigu.com" @click.prevent="showInfo1">点我提示信息</a>  
+
+        <!-- 2.stop：阻止事件冒泡 -->
+        <div id="demo1" @click="showInfo2">
+            <button @click.stop="showInfo2">点我提示信息</button>
+        </div>
+
+        <!-- 3.once：事件只触发一次 -->
+        <button @click.once="showInfo3">点我提示信息</button>  
+
+        <!-- 4.capture：使用时间的捕获模式，先捕获再冒泡，加在哪里就表示哪个元素在捕获阶段就触发事件 -->
+        <div @click.capture="showInfo4(1)" class="box1">
+            div1
+            <div @click="showInfo4(2)" class="box2">
+                div2
+            </div>
+        </div>
+
+        <!-- 5.self：只有event.target是当前操作的元素时才触发事件 -->
+        <div id="demo1" @click.self="showInfo5">
+            <button @click="showInfo5">点我提示信息</button>
+        </div>
+
+        <!-- 6.passive：事件的默认行为当即执行，无需等待事件回调执行完毕  不常用-->
+        <a href="http://www.atguigu.com" @click.passive="showInfo6">点我提示信息</a>  
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    name:'尚硅谷'
+                }
+            },
+            methods: {
+                showInfo1(e){
+                    // e.preventDefault();  // 该功能同prevent修饰符
+                    alert('同学你好')
+                },
+                showInfo2(e){
+                    // e.stopPropagation();  // 该功能同stop修饰符
+                    alert('cc')
+                },
+                showInfo3(e){
+                    alert('cc')
+                },
+                showInfo4(n){
+                    alert(n)
+                },
+                showInfo5(e){
+                    console.log(e.target)
+                },
+                showInfo6(e){
+                    alert('hahaha')
+                },
+
+            },
+        })
+        
+    </script>
+</body>
+</html>

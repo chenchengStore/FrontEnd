@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <!-- 
+        关于VueComponent：
+            1.school组件本质时一个名为VueComponent的构造函数，且不是程序员定义的，时Vue.extend生成的
+            2.我们只需要写<school/>或者<school><school/>，Vue解析时会帮我们创建school组件的实例对象，即Vue帮我们执行的new VueComponent(options)
+            3.特别注意：每次调用Vue.extend，返回的是一个全新的VueComponent
+            4.关于this的指向：
+                1.组件配置中：
+                    data函数、methods中的函数、watch中的函数、computed中的函数均是VueComponente实例对象
+                2.new Vue()配置中：
+                    data函数、methods中的函数、watch中的函数、computed中的函数均是Vue实例对象
+            5.VueComponent的实例对象，以后简称为vc（也可以称之为：组件实例对象）
+                vue的实例对象，以后简称vm
+     -->
+    <div id="root">
+        
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+
+                }
+            },
+        })
+        
+    </script>
+</body>
+</html>

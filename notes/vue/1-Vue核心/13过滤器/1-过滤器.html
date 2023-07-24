@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/cdn.bootcdn.net_ajax_libs_dayjs_1.11.7_dayjs.min.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <h2>显示格式化之后的时间</h2>
+        <h2>现在是:{{time}}</h2>
+        <!-- 计算属性实现 -->
+        <h2>现在是(计算属性):{{fmtTime}}</h2>
+        <!-- 过滤器实现 -->
+        <h2>现在是(过滤器)：{{time | timeFormater}}</h2>
+        <h2>现在是(过滤器)：{{time | timeFormater('YYYY_MM_DD')}}</h2>
+        <!-- 多个过滤器可以串联 -->
+        <h2>现在是(过滤器)：{{time | timeFormater('YYYY_MM_DD') | mySlice}}</h2>
+        <!-- 绑定在v-bind上，但是不可以用在v-model上 -->
+        <h2 :x="data | mySlice">尚硅谷</h2>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+
+        // 全局过滤器
+        Vue.filter('mySlice',function(value){
+            return value.slice(0,4)
+        })
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    time:1621561377603,
+                    data:'123456789'
+                }
+            },
+            computed:{
+                fmtTime(){
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 局部过滤器 
+            filters:{
+                timeFormater(value,format='YYYY-MM-DD HH:mm:ss'){
+                    return dayjs(value).format(format)
+                },
+                // mySlice(value){
+                //     return value.slice(0,4)
+                // }
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Vue</title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <!-- v-model:value可以简写为v-model -->
+
+        
+        <input type="text" v-model:value="name">
+        <input type="text" v-model="address">
+        <input type="text" v-bind:value="name">
+        
+        <!-- 如下代码是错误的，因为v-model只能应用在表单类（输入类）元素上 -->
+        <!-- <h2 v-model:x="name">你好啊</h2> -->
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data:{
+                name:'尚硅谷',
+                address:'北京',
+                url:'https://baidu.com'
+            }
+        })
+        
+        
+    </script>
+</body>
+</html>

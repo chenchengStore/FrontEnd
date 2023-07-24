@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Vue</title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <h1>hello,{{name}},{{address}}</h1>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',  
+            // data:{  // 第一种写法：对象式
+            //     name:'尚硅谷',
+            //     address:'北京'
+            // }
+            data() {  // 第二种写法：函数式
+                return {
+                    name:'尚硅谷',
+                    address:'北京'
+                }
+            },
+        })
+
+        // 除了el指定容器之外，还可以如下指定容器，并且如下方法可以异步
+        vm.$mount('#root')
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <!-- 给目标增加一个属性
+        Vue.set(target,key,val)
+        vm.$set(target,key,val)
+        注意：
+            1.不能给vm或者vm.data或者vm._data添加属性 
+            2.不能直接监听到数组元素的改变，除非修改数组,如push,pop,shift,unshift,splice,sort,reverse可以监听到
+            3.响应式监听数组元素还可以通过Vue.set(target,index,val)和vm.$set(target,index,val)的方式进行操作
+    -->
+    <script>
+        let data = {
+            name:'尚硅谷',
+            address:'北京'
+        }
+
+        const obs = new Observer(data)
+
+        const vm = {}
+        vm._data = data = obs
+
+        function Observer(obj){
+            const keys = Object.keys(obj)
+            keys.forEach((k)=>{
+                Object.defineProperty(this,k,{
+                    get(){
+                        return obj[k]
+                    },
+                    set(val){
+                        obj[j]=val
+                    }
+
+                })
+            })
+        }
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <h1>遍历数组</h1>
+            <li v-for="(person, index) in personList" :key="index">{{person.name}}--{{person.age}}--{{person.id}}--{{index}}</li>
+            <h1>遍历对象</h1>
+            <li v-for="(value, key) in car" ::key="key">{{value}}--{{key}}</li>
+            <h1>遍历字符串</h1>
+            <li v-for="(char,index) in str" ::key="index">{{char}}--{{index}}</li>
+            <h1>遍历常数</h1>
+            <li v-for="(number,index) in 5" key="index">{{number}}--{{index}}</li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    personList:[
+                        {id:'001',name:'张三',age:18},
+                        {id:'002',name:'李四',age:19},
+                        {id:'003',name:'王五',age:20},
+                        {name:'王五',age:20}
+                    ],
+                    car:{
+                        name:'cc',
+                        price:1280000,
+                        color:'black'
+                    },
+                    str:'hello'
+                }
+            },
+        })
+        
+    </script>
+</body>
+</html>

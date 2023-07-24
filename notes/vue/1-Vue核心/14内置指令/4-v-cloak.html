@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <!-- 在代码解析之后v-cloak就会消失，配合style使用可以防止页面闪现 -->
+        <div v-cloak>{{name}}</div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    name:'尚硅谷'
+                }
+            },
+        })
+        
+    </script>
+</body>
+</html>

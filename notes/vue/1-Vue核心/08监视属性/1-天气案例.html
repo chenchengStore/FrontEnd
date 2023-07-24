@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{climate}}</h2>
+        <button @click="changeClimate">切换天气</button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    isHot:true,
+                }
+            },
+            methods:{
+                changeClimate(){
+                    this.isHot = !this.isHot
+                },
+            },
+            computed:{
+                climate(){
+                    return this.isHot ? '炎热':'凉爽'
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

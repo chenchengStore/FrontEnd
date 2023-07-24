@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <!-- 点账号同样可以获取焦点
+        <form action="">
+            <label for="demo">账号：</label>  
+            <input type="text" id="demo">
+        </form> -->
+        <form action="" @submit.prevent="demo">
+            <!-- 修饰符trim可以实现去掉首尾空格 -->
+            账号：<input type="text" v-model.trim="account"><br><br>
+            密码：<input type="password" v-model="password"><br><br>
+            <!-- 修饰符number可以控制输入为数字，不是字符 -->
+            年龄：<input type="number" v-model.number="age"><br><br>
+            性别：
+            <!-- radio需要配置value -->
+            男<input type="radio" name="sex" value="male" v-model="sex">
+            女<input type="radio" name="sex" value="female" v-model="sex"><br><br>
+            爱好：
+            <!-- checkbox需要配置value,并且hobby类型必须为数组 -->
+            学习<input type="checkbox" v-model="hobby" value="learn">
+            打游戏<input type="checkbox" v-model="hobby" value="play">
+            吃饭<input type="checkbox" v-model="hobby" value="eat"><br><br>
+            所属校区：
+            <!-- select需要配置v-model，然后option需要配置value，并且location的初始值影响select的初始状态 -->
+            <select name="" id="" v-model="location">
+                <option value="none">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzheng">深圳</option>
+                <option value="wuhan">武汉</option>
+            </select>
+            <br><br>
+            其他信息：
+            <!-- 修饰符lazy实现懒惰收集，失去焦点才收集数据 -->
+            <textarea name="" id="" cols="30" rows="10" v-model.lazy="others"></textarea>
+            <br><br>
+            <input type="checkbox" v-model="check">阅读并接受<a href="">用户协议</a> <br><br>
+            <button >提交</button>
+        </form>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    account:'',
+                    password:'',
+                    age:18,
+                    sex:'male',
+                    hobby:[],
+                    location:'none',
+                    others:'',
+                    check:false
+                }
+            },
+            methods:{
+                demo(){
+                    console.log(JSON.stringify(this._data));
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

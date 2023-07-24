@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <input type="text" placeholder="请输入名字" v-model="keyword">
+        <ul>
+            <li v-for="(person, index) in personList" ::key="index">{{person.name}}--{{person.age}}--{{person.sex}}</li>
+        </ul>
+        <hr>
+        <hr>
+        <ul>
+            <li v-for="(person, index) in persons" ::key="index">{{person.name}}--{{person.age}}--{{person.sex}}</li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    personList:[
+                        
+                    ],
+                    keyword:'',
+                    personList1:[
+                        {name:'马冬梅',age:19,sex:'女'},
+                        {name:'周冬雨',age:20,sex:'女'},
+                        {name:'周杰伦',age:21,sex:'男'},
+                        {name:'温兆伦',age:22,sex:'男'},
+                    ],
+                }
+            },
+            //#region
+            watch: {
+                keyword:{
+                    immediate:true,
+                    handler(val){
+                        if(val===''){
+                            this.personList = this.personList1
+                            return
+                        }
+                        this.personList = this.personList1.filter(element => {
+                            return element.name.indexOf(val) !== -1
+                        });
+                    }
+                }
+            },
+            //#endregion
+            computed:{
+                persons(){
+                    // if(this.keyword===''){
+                    //     return this.personList1
+                    // }
+                    return this.personList1.filter(element => {
+                        return element.name.indexOf(this.keyword) !== -1
+                    });
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

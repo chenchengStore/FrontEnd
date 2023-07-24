@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        姓<input type="text" v-model="firstName"><br>
+        名<input type="text" v-model="lastName"><br>
+        姓名：<span>{{fullName}}</span><br>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    firstName:'张',
+                    lastName:'三'
+                }
+            },
+            computed:{
+                fullName:{
+                    // 缓存：
+                    //     get调用有两个时机：
+                    //         1.初次读取数据
+                    //         2.所依赖的数据发生改变
+                    get(){
+                        return this.firstName+'-'+this.lastName
+                    },
+                    // 
+                    // set调用的时机：当数据修改时
+                    // set函数要引起计算时依赖的数据发生变化，如下情况直接fullName=data是不行的，必须修改firstName和lastName才可以修改fullName
+                    set(data){
+                        const arr = data.split('-')
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

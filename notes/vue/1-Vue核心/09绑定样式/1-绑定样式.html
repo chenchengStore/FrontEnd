@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .sy3{
+            height: 150px;
+            background-color: #000;
+        }
+        .sy2{
+            height: 100px;
+            background-color: red;
+        }
+        .sy6{
+            height: 300px;
+            background-color: green;
+        }
+        .sy4{
+            height: 200px;
+            background-color: yellow;
+        }
+        .sy5{
+            height: 250px;
+            background-color: blue;
+        }
+        .sy1{
+            height: 50px;
+            background-color: grey;
+        }
+        .sy7{
+            height: 350px;
+            background-color: purple;
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+    <!-- <script src="js/vue.min.js"></script> -->
+</head>
+<body>
+    <div id="root">
+        <!-- 绑定class样式,应用场景：类名不确定 -->
+        <div :class="sy">{{name}}</div><br>
+        <!-- 应用场景：数目和类名不确定 -->
+        <div :class="classArr">{{name}}</div><br>
+        <!-- 应用场景：数目和类名都确定，但是在指定类中选择是否使用 -->
+        <div :class="classObj">{{name}}</div><br>
+
+        
+        <!-- 应用场景：样式自定义 -->
+        <div :style="styleObj1">{{name}}</div><br>
+        <!-- 应用场景：多个样式自定义 -->
+        <div :style="styleArr">{{name}}</div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false  // 阻止Vue在启动时生成生产提示
+        const vm = new Vue({  // 创建Vue实例
+            el:'#root',
+            data(){
+                return{
+                    name:'尚硅谷',
+                    sy:'sy2',
+                    classArr:['sy5','sy6','sy7'],
+                    classObj:{
+                        sy6:false,
+                        sy7:false,
+                    },
+                    styleObj1:{
+                        fontSize:'40px'
+                    },
+                    styleObj2:{
+                        backgroundColor:'green'
+                    },
+                    styleArr:[
+                        {
+                            fontSize:'40px'
+                        },
+                        {
+                            backgroundColor:'green'
+                        },
+                    ],
+                }
+            },
+        })
+        
+    </script>
+</body>
+</html>
