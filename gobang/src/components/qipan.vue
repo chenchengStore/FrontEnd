@@ -168,6 +168,7 @@ function chess(event){
   }
 
 }
+  // 控制跟随移动，并且棋子出现位置只能在交叉点上
 function move(event){
   const qizi = document.getElementsByName('qizi')
   if(event.clientX >= 150 && event.clientX <= 990)
