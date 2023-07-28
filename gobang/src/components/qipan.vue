@@ -1,38 +1,26 @@
 <template>
   <div class="main" @click="chess" @mousemove="move">
     <qizi name="qizi"></qizi>
-    <div class="line1" v-for="e in a" :key="index">
-      <div class="line2" v-for="x in a" :key="index"></div>
+    <div class="line1" v-for="e in a" :key="e">
+      <div class="line2" v-for="x in a" :key="x"></div>
     </div>
   </div>
 </template>
 
 <script setup>
 import qizi from "./qizi";
-const a = Array.apply(null, { length: 21 });
+let index = 0
+const a = Array.apply(null, { length: 21 }).map(function(item){item=index;index+=1;return item})
 // 设置棋子的颜色 0为黑色，1为白色
 let flag = 0;
 // 以下将棋盘及棋子抽象为两个20*20的数组，分别为黑棋落子和白棋落子
-let qiziTemp1 = [];
-let cc = [];
-for (let i = 0; i < 20; i++) {
-  cc = [];
+const qiziArr = [[], []]
+for (let i = 0; i < 2; i++) {
   for (let j = 0; j < 20; j++) {
-    cc.push(0);
+    let Temp = Array.apply(null, { length: 20 }).map(function(item){item=0;return item})
+    qiziArr[i].push(Temp)
   }
-  qiziTemp1.push(cc);
 }
-const qiziArr = [];
-qiziArr.push(qiziTemp1);
-let qiziTemp2 = [];
-for (let i = 0; i < 20; i++) {
-  cc = [];
-  for (let j = 0; j < 20; j++) {
-    cc.push(0);
-  }
-  qiziTemp2.push(cc);
-}
-qiziArr.push(qiziTemp2);
 // 点击落子的各种判断
 function chess(event) {
   const qizi = document.getElementsByClassName("qizi");
