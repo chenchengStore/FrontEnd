@@ -9,26 +9,36 @@
 
 <script setup>
 import qizi from "./qizi";
-let index = 0
-const a = Array.apply(null, { length: 21 }).map(function(item){item=index;index+=1;return item})
+let index = 0;
+const a = Array.apply(null, { length: 21 }).map(function (item) {
+  item = index;
+  index += 1;
+  return item;
+});
 // 设置棋子的颜色 0为黑色，1为白色
 let flag = 0;
 // 以下将棋盘及棋子抽象为两个20*20的数组，分别为黑棋落子和白棋落子
-const qiziArr = [[], []]
+const offset = 155
+const qiziArr = [[], []];
+console.log(qiziArr);
 for (let i = 0; i < 2; i++) {
   for (let j = 0; j < 20; j++) {
-    let Temp = Array.apply(null, { length: 20 }).map(function(item){item=0;return item})
-    qiziArr[i].push(Temp)
+    let Temp = Array.apply(null, { length: 20 }).map(function (item) {
+      item = 0;
+      return item;
+    });
+    qiziArr[i].push(Temp);
   }
 }
+
 // 点击落子的各种判断
 function chess(event) {
   const qizi = document.getElementsByClassName("qizi");
   const newqizi = document.createElement("div");
   const main = document.getElementsByClassName("main")[0];
   // 获得当前点击落子的位置
-  const i = qizi[qizi.length - 1].offsetTop / 40 - 1;
-  const j = (qizi[qizi.length - 1].offsetLeft - 150) / 40 - 1;
+  const i = parseInt(qizi[qizi.length - 1].offsetTop / 40 - 1);
+  const j = parseInt((qizi[qizi.length - 1].offsetLeft - offset) / 40 - 1);
   // 设置落子的样式和位置
   newqizi.className = "qizi";
   newqizi.style.left = qizi[qizi.length - 1].style.left;
@@ -136,12 +146,9 @@ function chess(event) {
     for (let m = 0; m < qiziArr.length; m++) {
       for (let n = 0; n < qiziArr[0].length; n++) {
         for (let l = 0; l < qiziArr[0][0].length; l++) {
-          qiziArr[m][n][l] = 0
-          
+          qiziArr[m][n][l] = 0;
         }
-        
       }
-      
     }
     return;
   }
@@ -153,10 +160,12 @@ function chess(event) {
     flag = 0;
     qizi[qizi.length - 1].style.backgroundColor = "black";
   }
+  console.log(qiziArr);
 }
 function move(event) {
   const qizi = document.getElementsByName("qizi");
-  if (event.clientX >= 150 && event.clientX <= 1990)
+  
+  if (event.clientX >= offset && event.clientX <= 1990)
     qizi[qizi.length - 1].style.left =
       event.clientX - qizi[qizi.length - 1].offsetWidth / 2 + "px";
   if (event.clientY >= 0 && event.clientY <= 840)
@@ -164,11 +173,11 @@ function move(event) {
       event.clientY - qizi[qizi.length - 1].offsetHeight / 2 + "px";
   const left = qizi[qizi.length - 1].offsetLeft;
   const top = qizi[qizi.length - 1].offsetTop;
-  let xLeft = -((left - 150) % 40);
+  let xLeft = -((left - offset) % 40);
   let xTop = -(top % 40);
 
-  if ((left - 150) % 40 > 20) {
-    xLeft = 40 - ((left - 150) % 40);
+  if ((left - offset) % 40 > 20) {
+    xLeft = 40 - ((left - offset) % 40);
   }
 
   if (top % 40 > 20) {
