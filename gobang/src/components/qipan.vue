@@ -1,8 +1,8 @@
 <template>
   <div class="main" @click="chess" @mousemove="move">
     <qizi name="qizi"></qizi>
-    <div class="line1" v-for="e in a">
-      <div class="line2" v-for="x in a"></div>
+    <div class="line1" v-for="e in a" :key="index">
+      <div class="line2" v-for="x in a" :key="index"></div>
     </div>
   </div>
 </template>
